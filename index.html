@@ -3,31 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Submit Your Case</title>
+  <title>Arham Luxe - Submit Your Case</title>
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    /* Base reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+      background: url('https://source.unsplash.com/1600x900/?resort,beach') center/cover no-repeat;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
-    /* Card container */
     .card {
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      width: 350px;
+      width: 380px;
       max-width: 90%;
       padding: 30px;
       animation: fadeInUp 0.8s ease-out both;
@@ -36,17 +30,20 @@
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    h1 {
-      font-weight: 600;
-      font-size: 1.6rem;
-      color: #333;
+    .hotel-name {
       text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.4rem;
+      color: #444;
       margin-bottom: 20px;
     }
-    .field {
-      position: relative;
-      margin-bottom: 18px;
-    }
+    .field { position: relative; margin-bottom: 18px; }
     .field label {
       display: block;
       font-weight: 500;
@@ -69,15 +66,6 @@
       box-shadow: 0 0 6px rgba(255, 138, 184, 0.4);
       outline: none;
     }
-    /* Cute icon on inputs */
-    .field svg {
-      position: absolute;
-      top: 38px;
-      right: 12px;
-      width: 18px;
-      height: 18px;
-      fill: #FF8AB8;
-    }
     /* Submit button */
     .btn-submit {
       width: 100%;
@@ -92,59 +80,54 @@
       transition: background 0.3s, transform 0.2s;
       margin-top: 10px;
     }
-    .btn-submit:hover {
-      background: #FF5CA9;
-      transform: translateY(-2px);
-    }
-    /* Responsive tweak */
-    @media (max-width: 400px) {
-      .card { padding: 20px; }
-    }
+    .btn-submit:hover { background: #FF5CA9; transform: translateY(-2px); }
+    @media (max-width: 400px) { .card { padding: 20px; } }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>🐰 Tell Us Your Case</h1>
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
+    <div class="hotel-name">Arham Luxe</div>
+    <h2>Submit Your Case</h2>
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST" onsubmit="return validateRating()">
       <input type="hidden" name="orgid" value="00DgK000003c3OC">
       <input type="hidden" name="retURL" value="http://">
-      
       <!-- Booking ID at Top -->
       <div class="field">
         <label for="bookingId">Booking ID (if any)</label>
         <input id="bookingId" name="00NgK000012NWWz" type="text" maxlength="20">
       </div>
-
       <div class="field">
         <label for="name">Your Name</label>
         <input id="name" name="name" type="text" maxlength="80" required>
-        <!-- user icon -->
-        <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
       </div>
-
       <div class="field">
         <label for="email">Email Address</label>
         <input id="email" name="email" type="email" maxlength="80" required>
-        <!-- email icon -->
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </div>
-
       <div class="field">
         <label for="subject">Subject</label>
         <input id="subject" name="subject" type="text" maxlength="80" required>
-        <!-- chat icon -->
-        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
       </div>
-
       <div class="field">
         <label for="description">Case Details</label>
         <textarea id="description" name="description" required></textarea>
-        <!-- note icon -->
-        <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h18c1.1 0 2-.9 2-2V5a2 2 0 0 0-2-2zm0 16H3V5h18v14z"/></svg>
       </div>
-
+      <div class="field">
+        <label for="rating">Rating (0-10)</label>
+        <input id="rating" name="rating__c" type="number" min="0" max="10" required>
+      </div>
       <button type="submit" class="btn-submit">Send Case 💌</button>
     </form>
   </div>
+  <script>
+    function validateRating() {
+      const rating = document.getElementById('rating').value;
+      if (rating === '' || rating < 0 || rating > 10) {
+        alert('Please enter a valid rating between 0 and 10.');
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
