@@ -2,111 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome to Your Hotel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Submit Your Case</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    /* Reset and base styles */
-    * {
+    /* Base reset */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://source.unsplash.com/1600x900/?hotel,room') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-
-    .form-container {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
-      border-radius: 10px;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    /* Card container */
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 350px;
+      max-width: 90%;
+      padding: 30px;
+      animation: fadeInUp 0.8s ease-out both;
     }
-
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 1.6rem;
       color: #333;
+      text-align: center;
+      margin-bottom: 20px;
     }
-
-    label {
+    .field {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .field label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
+      font-weight: 500;
+      margin-bottom: 6px;
       color: #555;
     }
-
-    input[type="text"],
-    input[type="email"],
-    textarea {
+    .field input,
+    .field textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    textarea {
+      padding: 12px 14px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
       resize: vertical;
-      min-height: 100px;
     }
-
-    .submit-button {
-      margin-top: 25px;
+    .field input:focus,
+    .field textarea:focus {
+      border-color: #FF8AB8;
+      box-shadow: 0 0 6px rgba(255, 138, 184, 0.4);
+      outline: none;
+    }
+    /* Cute icon on inputs */
+    .field svg {
+      position: absolute;
+      top: 38px;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      fill: #FF8AB8;
+    }
+    /* Submit button */
+    .btn-submit {
       width: 100%;
       padding: 14px;
-      background-color: #007BFF;
-      border: none;
+      background: #FF8AB8;
       color: white;
-      font-size: 18px;
-      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
     }
-
-    .submit-button:hover {
-      background-color: #0056b3;
+    .btn-submit:hover {
+      background: #FF5CA9;
+      transform: translateY(-2px);
     }
-
-    @media (max-width: 600px) {
-      .form-container {
-        padding: 20px;
-      }
+    /* Responsive tweak */
+    @media (max-width: 400px) {
+      .card { padding: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h1>Book Your Stay</h1>
+  <div class="card">
+    <h1>🐰 Tell Us Your Case</h1>
     <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
       <input type="hidden" name="orgid" value="00DgK000003c3OC">
       <input type="hidden" name="retURL" value="http://">
 
-      <label for="name">Contact Name</label>
-      <input id="name" name="name" type="text" maxlength="80" required>
+       <!-- Optional: Booking ID or Custom Field -->
+      <div class="field">
+        <label for="bookingId">Booking ID (if any)</label>
+        <input id="bookingId" name="00NgK000012NWWz" type="text" maxlength="20">
+      </div>
+      
+      <div class="field">
+        <label for="name">Your Name</label>
+        <input id="name" name="name" type="text" maxlength="80" required>
+        <!-- user icon -->
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" maxlength="80" required>
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" name="email" type="email" maxlength="80" required>
+        <!-- email icon -->
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
 
-      <label for="subject">Subject</label>
-      <input id="subject" name="subject" type="text" maxlength="80" required>
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" maxlength="80" required>
+        <!-- chat icon -->
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
 
-      <label for="description">Description</label>
-      <textarea id="description" name="description" required></textarea>
+      <div class="field">
+        <label for="description">Case Details</label>
+        <textarea id="description" name="description" required></textarea>
+        <!-- note icon -->
+        <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h18c1.1 0 2-.9 2-2V5a2 2 0 0 0-2-2zm0 16H3V5h18v14z"/></svg>
+      </div>
 
-      <label for="bookingId">Booking ID</label>
-      <input id="bookingId" name="00NgK000012NWWz" type="text" maxlength="20">
+     
 
-      <button type="submit" class="submit-button">Submit</button>
+      <button type="submit" class="btn-submit">Send Case 💌</button>
     </form>
   </div>
 </body>
