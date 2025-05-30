@@ -3,145 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arham Luxe – Guest Feedback</title>
-
-  <!-- Elegant Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+  <title>Arham Luxe - Customer Case Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Playfair Display', serif;
-      background: url('https://media.cntraveler.com/photos/5c06e5a801ffc86b13da2529/16%3A9/w_2560%2Cc_limit/The-Oberoi-Udaivilas%2C-Udaipur__2018_Chandni----the-al-fresco-dining---The-Oberoi-Udaivilas%2C-Udaipur.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
+      box-sizing: border-box;
     }
-
-    .header {
-      text-align: center;
-      padding: 40px 20px 10px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .header h1 {
-      font-size: 3em;
-      color: #e0c185;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-      margin: 0;
-    }
-
-    .form-container, .thank-you-container {
-      max-width: 650px;
-      margin: 30px auto 50px;
+    .container {
+      background: rgba(255, 255, 255, 0.95);
       padding: 30px;
-      background: rgba(0, 0, 0, 0.75);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeInUp 0.8s ease-in-out;
     }
-
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
     h2 {
       text-align: center;
-      color: #e0c185;
-      font-size: 1.8em;
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #fff8dc;
-      font-size: 1.1em;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    textarea {
-      width: 100%;
-      padding: 10px;
+      font-size: 1.2rem;
+      color: #666;
       margin-bottom: 20px;
-      border: 2px solid #e0c185;
-      border-radius: 6px;
-      background: #fff;
-      color: #333;
-      font-size: 1em;
     }
-
-    input[type="submit"] {
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+      color: #555;
+    }
+    input, textarea {
       width: 100%;
       padding: 12px;
-      background: #e0c185;
+      border-radius: 10px;
+      border: 1.5px solid #ddd;
+      font-size: 0.95rem;
+      transition: 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #FF8AB8;
+      outline: none;
+      box-shadow: 0 0 5px rgba(255,138,184,0.4);
+    }
+    .btn {
+      width: 100%;
+      background-color: #FF8AB8;
+      color: white;
+      padding: 12px;
       border: none;
-      border-radius: 6px;
-      color: #333;
-      font-size: 1.2em;
-      font-weight: bold;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: 0.3s ease;
     }
-
-    input[type="submit"]:hover {
-      background: #d6b25c;
+    .btn:hover {
+      background-color: #FF5CA9;
+      transform: translateY(-2px);
     }
-
-    .error {
-      color: #ffd2d2;
-      font-size: 0.9em;
-      margin-bottom: 20px;
-    }
-
-    .thank-you-container {
-      display: none;
-      text-align: center;
-    }
-
-    .thank-you-container h2 {
-      font-size: 2.5em;
-      color: #f8e5b6;
-      margin-bottom: 15px;
-    }
-
-    .thank-you-container p {
-      font-size: 1.2em;
-      color: #fffbe8;
+    @media (max-width: 450px) {
+      .container { width: 90%; }
     }
   </style>
 </head>
 <body>
-
-  <div class="header">
+  <div class="container">
     <h1>Arham Luxe</h1>
-  </div>
-
-  <!-- Feedback Form Section -->
-  <div class="form-container" id="formContainer">
-    <h2>We Value Your Feedback</h2>
-    <form id="feedbackForm" onsubmit="return handleSubmit(event)">
+    <h2>Submit Your Case</h2>
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST" onsubmit="return validateRating()">
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
+      <input type="hidden" name="retURL" value="http://" />
 
-      <label for="bookingId">Booking ID</label>
-      <input type="text" id="bookingId" name="00NgK000012NWWz" required />
+      <div class="form-group">
+        <label for="bookingId">Booking ID </label>
+        <input type="text" id="bookingId" name="00NgK000012NWWz" maxlength="20" />
+      </div>
 
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" required />
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" maxlength="80" required />
+      </div>
 
-      <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" required />
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" maxlength="80" required />
+      </div>
 
-      <label for="subject">Subject</label>
-      <input type="text" id="subject" name="subject" required />
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" maxlength="80" required />
+      </div>
 
-      <label for="description">Your Feedback</label>
-      <textarea id="description" name="description" rows="4" required></textarea>
+      <div class="form-group">
+        <label for="description">Case Details</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+      </div>
 
-      <label for="rating">Rating (1-10)</label>
-      <input type="number" id="rating" name="rating" min="1" max="10" required />
-      <div id="ratingError" class="error"></div>
+      <div class="form-group">
+        <label for="rating">Rating (0-10)</label>
+        <input type="number" id="rating" name="rating__c" min="0" max="10" required />
+      </div>
 
-      <input type="submit" value="Submit Feedback" />
+      <button type="submit" class="btn">Send Case 💌</button>
     </form>
   </div>
 
-  <!-- Thank You Page -->
-  <div class="thank-you-container" id="thankYouPage">
-    <
+  <script>
+    function validateRating() {
+      const rating = parseFloat(document.getElementById('rating').value);
+      if (isNaN(rating) || rating < 0 || rating > 10) {
+        alert('Please enter a valid rating between 0 and 10.');
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
