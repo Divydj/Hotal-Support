@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arham Luxe – Guest Feedback</title>
+  <title>Arham Luxe – Guest Case Submission</title>
 
   <!-- Elegant Font -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Playfair Display', serif;
-      background: url('https://media.cntraveler.com/photos/5c06e5a801ffc86b13da2529/16%3A9/w_2560%2Cc_limit/The-Oberoi-Udaivilas%2C-Udaipur__2018_Chandni----the-al-fresco-dining---The-Oberoi-Udaivilas%2C-Udaipur.jpg') no-repeat center center fixed;
+      background: url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
     }
@@ -55,7 +55,7 @@
 
     input[type="text"],
     input[type="email"],
-    input[type="number"],
+    input[type="tel"],
     textarea {
       width: 100%;
       padding: 10px;
@@ -113,35 +113,77 @@
     <h1>Arham Luxe</h1>
   </div>
 
-  <!-- Feedback Form Section -->
+  <!-- Case Submission Form -->
   <div class="form-container" id="formContainer">
-    <h2>We Value Your Feedback</h2>
-    <form id="feedbackForm" onsubmit="return handleSubmit(event)">
+    <h2>Submit a Case</h2>
+    <form id="caseForm" onsubmit="return handleSubmit(event)">
+      <!-- Your Salesforce Org ID -->
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
 
+      <!-- Booking ID -->
       <label for="bookingId">Booking ID</label>
       <input type="text" id="bookingId" name="00NgK000012NWWz" required />
 
+      <!-- Name -->
       <label for="name">Your Name</label>
       <input type="text" id="name" name="name" required />
 
+      <!-- Email -->
       <label for="email">Your Email</label>
       <input type="email" id="email" name="email" required />
 
+      <!-- Phone -->
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <!-- Subject -->
       <label for="subject">Subject</label>
       <input type="text" id="subject" name="subject" required />
 
-      <label for="description">Your Feedback</label>
+      <!-- Description -->
+      <label for="description">Case Description</label>
       <textarea id="description" name="description" rows="4" required></textarea>
 
-      <label for="rating">Rating (1-10)</label>
-      <input type="number" id="rating" name="rating" min="1" max="10" required />
-      <div id="ratingError" class="error"></div>
-
-      <input type="submit" value="Submit Feedback" />
+      <div id="formError" class="error"></div>
+      <input type="submit" value="Submit Case" />
     </form>
   </div>
 
-  <!-- Thank You Page -->
+  <!-- Thank You Message -->
   <div class="thank-you-container" id="thankYouPage">
-    <
+    <h2>Thank You!</h2>
+    <p>Your case has been submitted successfully.<br>We will get back to you shortly.</p>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      // Basic validation (ensure all required fields are filled)
+      const form = document.getElementById('caseForm');
+      if (!form.checkValidity()) {
+        document.getElementById('formError').textContent = 'Please fill out all required fields.';
+        return false;
+      }
+
+      // Clear any previous error
+      document.getElementById('formError').textContent = '';
+
+      // Send to Salesforce Web-to-Case endpoint
+      const formData = new FormData(form);
+      fetch('https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+
+      // Show Thank You message
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('thankYouPage').style.display = 'block';
+
+      return false;
+    }
+  </script>
+
+</body>
+</html>
