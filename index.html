@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arham Luxe - Customer Case Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <title>Arham Luxe – Customer Case Form</title>
+
+  <!-- Royal-themed fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet"/>
+
   <style>
     * {
       margin: 0;
@@ -12,88 +15,110 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
         url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg') center/cover no-repeat;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #2c2c2c;
     }
     .container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.97);
       padding: 30px;
       border-radius: 20px;
-      width: 400px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 420px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
       animation: fadeInUp 0.8s ease-in-out;
     }
     @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     h1 {
       text-align: center;
-      color: #333;
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #D4AF37; /* Gold */
+      margin-bottom: 5px;
     }
     h2 {
       text-align: center;
       font-size: 1.2rem;
-      color: #666;
-      margin-bottom: 20px;
+      color: #555;
+      margin-bottom: 25px;
     }
     .form-group {
       margin-bottom: 16px;
     }
     label {
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 6px;
       display: block;
-      color: #555;
+      color: #444;
     }
     input, textarea {
       width: 100%;
       padding: 12px;
       border-radius: 10px;
-      border: 1.5px solid #ddd;
-      font-size: 0.95rem;
-      transition: 0.3s ease;
+      border: 1.5px solid #ccc;
+      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     input:focus, textarea:focus {
-      border-color: #FF8AB8;
+      border-color: #D4AF37; /* Gold on focus */
       outline: none;
-      box-shadow: 0 0 5px rgba(255,138,184,0.4);
+      box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
     }
     .btn {
       width: 100%;
-      background-color: #FF8AB8;
+      background-color: #D4AF37; /* Gold */
       color: white;
       padding: 12px;
       border: none;
       border-radius: 12px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .btn:hover {
-      background-color: #FF5CA9;
+      background-color: #c2952d; /* Darker gold */
       transform: translateY(-2px);
     }
-    @media (max-width: 450px) {
-      .container { width: 90%; }
+    .thank-you {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .thank-you h1 {
+      font-size: 2.4rem;
+      color: #D4AF37; /* Gold */
+      font-family: 'Great Vibes', cursive;
+    }
+    .thank-you p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    @media (max-width: 460px) {
+      .container { width: 92%; }
     }
   </style>
 </head>
+
 <body>
   <div class="container" id="formContainer">
     <h1>Arham Luxe</h1>
-    <h2>Submit Your Case</h2>
-    <form id="caseForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
+    <h2>Submit Your Royal Case</h2>
+
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC"
+          method="POST"
+          onsubmit="return validateRating()">
+
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
-      <input type="hidden" name="retURL" value="http://thankyou.local" />
+      <input type="hidden" name="retURL" value="http://" />
 
       <div class="form-group">
         <label for="bookingId">Booking ID</label>
@@ -125,10 +150,9 @@
   </div>
 
   <script>
-    document.getElementById('caseForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const form = e.target;
+    function validateRating() {
+      // AJAX submission to preserve SFDC Web-to-Case and show Thank You
+      const form = document.querySelector('#formContainer form');
       const xhr = new XMLHttpRequest();
       xhr.open(form.method, form.action);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -138,18 +162,20 @@
       xhr.onload = function () {
         if (xhr.status === 200) {
           document.getElementById('formContainer').innerHTML = `
-            <h1>Thank You! 🎉</h1>
-            <h2>Your case has been submitted successfully.</h2>
-            <button class="btn" onclick="window.location.reload()">Submit Another Case</button>
+            <div class="thank-you">
+              <h1>Thank You 💖</h1>
+              <p>Your case has been submitted successfully.</p>
+              <button class="btn" onclick="window.location.reload()">Submit Another Case</button>
+            </div>
           `;
         } else {
-          alert('An error occurred. Please try again.');
+          alert('An error occurred while submitting. Please try again.');
         }
       };
 
       xhr.send(formData);
-    });
+      return false; // Prevent default form submit
+    }
   </script>
 </body>
 </html>
-
