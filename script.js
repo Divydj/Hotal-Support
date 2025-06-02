@@ -23,7 +23,7 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   const emailElem = document.getElementById('email');
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  Validation logic
+ 
   if (!document.getElementById('Booking__c').value.trim()) {
     errors.push('• Booking Id is required.');
     document.getElementById('Booking__c').classList.add('error-border');
