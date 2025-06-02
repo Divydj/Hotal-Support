@@ -22,7 +22,7 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
 
   const emailElem = document.getElementById('email');
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const params = new URLSerachParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
  document.getElementById('Booking__c').value = params.has('bookingId')? params.get('bookingId'):'';
   // if (!document.getElementById('Booking__c').value.trim()) {
   //   errors.push('• Booking Id is required.');
