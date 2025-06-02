@@ -1,76 +1,54 @@
-document.getElementById('complaintForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Temporarily block form submission
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('complaintForm');
 
-  const fields = [
-    { id: 'bookingId', name: 'Booking Id' },
-    { id: 'name',     name: 'Contact Name' },
-    { id: 'email',    name: 'Email' },
-    { id: 'phone',    name: 'Phone' },
-    { id: 'subject',  name: 'Subject' },
-    { id: 'description', name: 'Description' }
-  ];
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
 
-  let errors = [];
-  fields.forEach(f => {
-    document.getElementById(f.id).classList.remove('error-border');
-    document.getElementById('err-' + f.id).textContent = '';
+    const fields = [
+      { id: 'bookingId', name: 'Booking Id' },
+      { id: 'name', name: 'Contact Name' },
+      { id: 'email', name: 'Email' },
+      { id: 'phone', name: 'Phone' },
+      { id: 'subject', name: 'Subject' },
+      { id: 'description', name: 'Description' }
+    ];
+
+    let errors = [];
+    fields.forEach(f => {
+      document.getElementById(f.id).classList.remove('error-border');
+      document.getElementById('err-' + f.id).textContent = '';
+    });
+
+    const summaryBox = document.getElementById('errorSummary');
+    summaryBox.style.display = 'none';
+    summaryBox.innerHTML = '';
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validation logic
+    fields.forEach(f => {
+      const value = document.getElementById(f.id).value.trim();
+      if (!value) {
+        errors.push(`• ${f.name} is required.`);
+        document.getElementById(f.id).classList.add('error-border');
+        document.getElementById('err-' + f.id).textContent = `Please enter your ${f.name.toLowerCase()}.`;
+      }
+    });
+
+    const email = document.getElementById('email').value.trim();
+    if (email && !emailPattern.test(email)) {
+      errors.push('• Email must be a valid email address.');
+      document.getElementById('email').classList.add('error-border');
+      document.getElementById('err-email').textContent = 'Invalid email format.';
+    }
+
+    if (errors.length > 0) {
+      summaryBox.style.display = 'block';
+      summaryBox.innerHTML = errors.join('<br>');
+      return;
+    }
+
+    // Submit the form to Salesforce
+    form.submit();
   });
-
-  const summaryBox = document.getElementById('errorSummary');
-  summaryBox.style.display = 'none';
-  summaryBox.innerHTML = '';
-
-  const emailElem = document.getElementById('email');
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Validation logic
-  if (!document.getElementById('bookingId').value.trim()) {
-    errors.push('• Booking Id is required.');
-    document.getElementById('bookingId').classList.add('error-border');
-    document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
-  }
-
-  if (!document.getElementById('name').value.trim()) {
-    errors.push('• Contact Name is required.');
-    document.getElementById('name').classList.add('error-border');
-    document.getElementById('err-name').textContent = 'Please enter your name.';
-  }
-
-  const emailVal = emailElem.value.trim();
-  if (!emailVal) {
-    errors.push('• Email is required.');
-    emailElem.classList.add('error-border');
-    document.getElementById('err-email').textContent = 'Please enter an email address.';
-  } else if (!emailPattern.test(emailVal)) {
-    errors.push('• Email must be a valid email address.');
-    emailElem.classList.add('error-border');
-    document.getElementById('err-email').textContent = 'Invalid email format.';
-  }
-
-  if (!document.getElementById('phone').value.trim()) {
-    errors.push('• Phone is required.');
-    document.getElementById('phone').classList.add('error-border');
-    document.getElementById('err-phone').textContent = 'Please enter your phone number.';
-  }
-
-  if (!document.getElementById('subject').value.trim()) {
-    errors.push('• Subject is required.');
-    document.getElementById('subject').classList.add('error-border');
-    document.getElementById('err-subject').textContent = 'Please enter a subject.';
-  }
-
-  if (!document.getElementById('description').value.trim()) {
-    errors.push('• Description is required.');
-    document.getElementById('description').classList.add('error-border');
-    document.getElementById('err-description').textContent = 'Please enter a description.';
-  }
-
-  if (errors.length > 0) {
-    summaryBox.style.display = 'block';
-    summaryBox.innerHTML = errors.join('<br>');
-    return; // Stop submission
-  }
-
-  // ✅ Submit form if validation passes
-  this.submit();
 });
