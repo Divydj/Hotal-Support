@@ -27,7 +27,7 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   if (!document.getElementById('Booking__c').value.trim()) {
     errors.push('• Booking Id is required.');
     document.getElementById('Booking__c').classList.add('error-border');
-    document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
+    document.getElementById('err-Booking__c').textContent = 'Please enter your Booking Id.';
   }
 
   if (!document.getElementById('name').value.trim()) {
