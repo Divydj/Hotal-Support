@@ -22,13 +22,13 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
 
   const emailElem = document.getElementById('email');
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
- 
-  if (!document.getElementById('Booking__c').value.trim()) {
-    errors.push('• Booking Id is required.');
-    document.getElementById('Booking__c').classList.add('error-border');
-    document.getElementById('err-Booking__c').textContent = 'Please enter your Booking Id.';
-  }
+const params = new URLSerachParams(window.location.search);
+ document.getElementById('Booking__c').value = params.has('bookingId')? params.get('bookingId'):'';
+  // if (!document.getElementById('Booking__c').value.trim()) {
+  //   errors.push('• Booking Id is required.');
+  //   document.getElementById('Booking__c').classList.add('error-border');
+  //   document.getElementById('err-Booking__c').textContent = 'Please enter your Booking Id.';
+  // }
 
   if (!document.getElementById('name').value.trim()) {
     errors.push('• Contact Name is required.');
