@@ -1,158 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arham Luxe – Customer Case Form</title>
-
-  <!-- Royal-themed fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet"/>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg') center/cover no-repeat;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #2c2c2c;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.97);
-      padding: 30px;
-      border-radius: 20px;
-      width: 420px;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-      animation: fadeInUp 0.8s ease-in-out;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    h1 {
-      text-align: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.8rem;
-      color: #D4AF37; /* Gold */
-      margin-bottom: 5px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #555;
-      margin-bottom: 25px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: block;
-      color: #444;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      font-size: 1rem;
-      font-family: 'Playfair Display', serif;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    input:focus, textarea:focus {
-      border-color: #D4AF37; /* Gold on focus */
-      outline: none;
-      box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
-    }
-    .btn {
-      width: 100%;
-      background-color: #D4AF37; /* Gold */
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #c2952d; /* Darker gold */
-      transform: translateY(-2px);
-    }
-    .thank-you {
-      text-align: center;
-      padding: 30px 20px;
-    }
-    .thank-you h1 {
-      font-size: 2.4rem;
-      color: #D4AF37; /* Gold */
-      font-family: 'Great Vibes', cursive;
-    }
-    .thank-you p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #333;
-    }
-    @media (max-width: 460px) {
-      .container { width: 92%; }
-    }
-  </style>
+</style>
 </head>
-
 <body>
+  <div class="container">
   <div class="container" id="formContainer">
-    <h1>Arham Luxe</h1>
-    <h2>Submit Your Royal Case</h2>
-
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC"
-          method="POST"
-          onsubmit="return validateRating()">
-
-      <input type="hidden" name="orgid" value="00DgK000003c3OC" />
+<h1>Arham Luxe</h1>
+<h2>Submit Your Case</h2>
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST" onsubmit="return validateRating()">
+    <form id="caseForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
+<input type="hidden" name="orgid" value="00DgK000003c3OC" />
       <input type="hidden" name="retURL" value="http://" />
+      <input type="hidden" name="retURL" value="http://thankyou.local" />
 
-      <div class="form-group">
+<div class="form-group">
+        <label for="bookingId">Booking ID </label>
         <label for="bookingId">Booking ID</label>
-        <input type="text" id="bookingId" name="00NgK000012NWWz" maxlength="20" />
-      </div>
+<input type="text" id="bookingId" name="00NgK000012NWWz" maxlength="20" />
+</div>
 
-      <div class="form-group">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" maxlength="80" required />
-      </div>
+@@ -120,21 +120,36 @@ <h2>Submit Your Case</h2>
+<textarea id="description" name="description" rows="4" required></textarea>
+</div>
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" maxlength="80" required />
-      </div>
+    
 
-      <div class="form-group">
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" maxlength="80" required />
-      </div>
+<button type="submit" class="btn">Send Case 💌</button>
+</form>
+</div>
 
-      <div class="form-group">
-        <label for="description">Case Details</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
-      </div>
-
-      <button type="submit" class="btn">Send Case 💌</button>
-    </form>
-  </div>
-
-  <script>
+<script>
     function validateRating() {
-      // AJAX submission to preserve SFDC Web-to-Case and show Thank You
-      const form = document.querySelector('#formContainer form');
+      const rating = parseFloat(document.getElementById('rating').value);
+      if (isNaN(rating) || rating < 0 || rating > 10) {
+        alert('Please enter a valid rating between 0 and 10.');
+        return false;
+      }
+      return true;
+    }
+    document.getElementById('caseForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
       const xhr = new XMLHttpRequest();
       xhr.open(form.method, form.action);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -162,20 +49,17 @@
       xhr.onload = function () {
         if (xhr.status === 200) {
           document.getElementById('formContainer').innerHTML = `
-            <div class="thank-you">
-              <h1>Thank You 💖</h1>
-              <p>Your case has been submitted successfully.</p>
-              <button class="btn" onclick="window.location.reload()">Submit Another Case</button>
-            </div>
+            <h1>Thank You! 🎉</h1>
+            <h2>Your case has been submitted successfully.</h2>
+            <button class="btn" onclick="window.location.reload()">Submit Another Case</button>
           `;
         } else {
-          alert('An error occurred while submitting. Please try again.');
+          alert('An error occurred. Please try again.');
         }
       };
 
       xhr.send(formData);
-      return false; // Prevent default form submit
-    }
-  </script>
+    });
+</script>
 </body>
 </html>
