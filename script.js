@@ -73,5 +73,5 @@ const params = new URLSearchParams(window.location.search);
 
   // ✅ Submit form if validation passes
   this.submit();
-  window.location.href = 'Hotal-Support/thankyou.html';
+  window.location.href = 'thankyou.html';
 });
