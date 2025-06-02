@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Arham Luxe Complaint Form</title>
-
-  <!-- Full‐page background image -->
+  <title>Arham Luxe Hotel Complaint Form</title>
   <style>
     html, body {
       margin: 0;
@@ -12,16 +10,15 @@
       height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+ 
     body {
-      /* Taj Rambagh Palace exterior image as background */
-      background: 
+      background:
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
         url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg')
         center/cover no-repeat;
       color: #f5f5f5;
     }
-
-    /* Center container */
+ 
     .container {
       max-width: 500px;
       margin: 60px auto;
@@ -31,17 +28,16 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.8);
       padding: 30px 25px;
     }
-
+ 
     h1 {
       text-align: center;
       font-size: 1.9rem;
       margin-bottom: 20px;
-      color: #D4AF37; /* Gold accent */
+      color: #D4AF37;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    /* FORM LABELS & INPUTS */
+ 
     label {
       display: block;
       margin-bottom: 6px;
@@ -49,6 +45,7 @@
       color: #f0e6d2;
       font-size: 0.95rem;
     }
+ 
     input[type="text"],
     input[type="email"],
     input[type="tel"],
@@ -63,36 +60,35 @@
       font-size: 1rem;
       resize: vertical;
     }
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="tel"]:focus,
+ 
+    input:focus,
     textarea:focus {
       outline: none;
       border-color: #D4AF37;
       box-shadow: 0 0 6px rgba(212, 175, 55, 0.7);
     }
-
-    /* ERROR MESSAGE STYLING */
+ 
     .error-text {
       color: #ff6b6b;
       font-size: 0.875rem;
       margin-top: -8px;
       margin-bottom: 10px;
     }
+ 
     .error-border {
       border-color: #ff6b6b !important;
     }
+ 
     #errorSummary {
       background-color: #ff6b6b;
       color: #1f1f1f;
       padding: 12px 16px;
       border-radius: 4px;
       margin-bottom: 20px;
-      display: none; /* hidden by default */
+      display: none;
       font-size: 0.95rem;
     }
-
-    /* SUBMIT BUTTON */
+ 
     .btn-submit {
       width: 100%;
       padding: 12px;
@@ -105,168 +101,148 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
+ 
     .btn-submit:hover {
       background-color: #c49c2f;
     }
-
-    /* Required‐field asterisk */
+ 
     .required-asterisk {
       color: #D4AF37;
       margin-left: 2px;
     }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <h1>Hotel Arham Luxe  Complaint</h1>
-
-    <!-- ERROR SUMMARY: visible only when JS finds errors -->
+    <h1>Arham Luxe Hotel Complaint</h1>
     <div id="errorSummary"></div>
-
-    <!-- ────────── Web‐to‐Case Form ────────── -->
+ 
     <form id="complaintForm"
-          action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
-          method="POST" novalidate>
-
-      <!-- HIDDEN FIELDS: Salesforce Web-to-Case -->
+      action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
+      method="POST" novalidate>
+ 
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
       <input type="hidden" name="retURL" value="thankyou.html" />
-
-      <!-- Hidden: Hotel Name (custom Case field: Hotel_Name__c) -->
       <input type="hidden" name="Hotel_Name__c" value="Arham Luxe" />
-
-      <!-- OPTIONAL DEBUG (uncomment to test XML response) -->
-      <!-- <input type="hidden" name="debug" value="1" /> -->
-      <!-- <input type="hidden" name="debugEmail" value="jaindivy153@gmail.com" /> -->
-
-      <!-- ────────────────────────────────────────────────── -->
-      <!-- 1) Booking Id (Required) – Salesforce field API name = 00NgK000012NWWz -->
+ 
+      <!-- Booking Id -->
       <label for="bookingId">Booking Id<span class="required-asterisk">*</span></label>
       <input id="bookingId" name="00NgK000012NWWz" type="text" maxlength="20" />
       <div id="err-bookingId" class="error-text"></div>
-
-      <!-- 2) Contact Name (Required) -->
+ 
+      <!-- Contact Name -->
       <label for="name">Contact Name<span class="required-asterisk">*</span></label>
       <input id="name" name="name" type="text" maxlength="80" />
       <div id="err-name" class="error-text"></div>
-
-      <!-- 3) Email (Required, valid email) -->
+ 
+      <!-- Email -->
       <label for="email">Email<span class="required-asterisk">*</span></label>
       <input id="email" name="email" type="email" maxlength="80" />
       <div id="err-email" class="error-text"></div>
-
-      <!-- 4) Phone (Required) -->
+ 
+      <!-- Phone -->
       <label for="phone">Phone<span class="required-asterisk">*</span></label>
       <input id="phone" name="phone" type="tel" maxlength="40" />
       <div id="err-phone" class="error-text"></div>
-
-      <!-- 5) Subject (Required) -->
+ 
+      <!-- Subject -->
       <label for="subject">Subject<span class="required-asterisk">*</span></label>
       <input id="subject" name="subject" type="text" maxlength="80" />
       <div id="err-subject" class="error-text"></div>
-
-      <!-- 6) Description (Required) -->
+ 
+      <!-- Description -->
       <label for="description">Description<span class="required-asterisk">*</span></label>
       <textarea id="description" name="description" rows="5"></textarea>
       <div id="err-description" class="error-text"></div>
-
-      <!-- 7) Submit Button -->
+ 
       <button type="submit" class="btn-submit">Submit Complaint</button>
     </form>
   </div>
-
-  <!-- ────────────────────────────────────────────────── -->
-  <!-- JAVASCRIPT: CLIENT‐SIDE VALIDATION (show all errors at once) -->
+ 
   <script>
-    document.getElementById('complaintForm').addEventListener('submit', function(event) {
-      // Prevent default so we can validate first
-      event.preventDefault();
-
-      // Field IDs and their corresponding error‐message containers
-      const fields = [
-        { id: 'bookingId', name: 'Booking Id' },
-        { id: 'name',     name: 'Contact Name' },
-        { id: 'email',    name: 'Email' },
-        { id: 'phone',    name: 'Phone' },
-        { id: 'subject',  name: 'Subject' },
-        { id: 'description', name: 'Description' }
-      ];
-
-      // Clear previous error states
-      let errors = [];
-      fields.forEach(f => {
-        document.getElementById(f.id).classList.remove('error-border');
-        document.getElementById('err-' + f.id).textContent = '';
-      });
-      const summaryBox = document.getElementById('errorSummary');
-      summaryBox.style.display = 'none';
-      summaryBox.innerHTML = '';
-
-      // 1) Booking Id: Required, non‐empty
-      const bookingVal = document.getElementById('bookingId').value.trim();
-      if (!bookingVal) {
-        errors.push('• Booking Id is required.');
-        document.getElementById('bookingId').classList.add('error-border');
-        document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
-      }
-
-      // 2) Contact Name: Required, non‐empty
-      const nameVal = document.getElementById('name').value.trim();
-      if (!nameVal) {
-        errors.push('• Contact Name is required.');
-        document.getElementById('name').classList.add('error-border');
-        document.getElementById('err-name').textContent = 'Please enter your name.';
-      }
-
-      // 3) Email: Required, valid email format
-      const emailElem = document.getElementById('email');
-      const emailVal = emailElem.value.trim();
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailVal) {
-        errors.push('• Email is required.');
-        emailElem.classList.add('error-border');
-        document.getElementById('err-email').textContent = 'Please enter an email address.';
-      } else if (!emailPattern.test(emailVal)) {
-        errors.push('• Email must be a valid email address.');
-        emailElem.classList.add('error-border');
-        document.getElementById('err-email').textContent = 'Invalid email format.';
-      }
-
-      // 4) Phone: Required, non‐empty
-      const phoneVal = document.getElementById('phone').value.trim();
-      if (!phoneVal) {
-        errors.push('• Phone is required.');
-        document.getElementById('phone').classList.add('error-border');
-        document.getElementById('err-phone').textContent = 'Please enter your phone number.';
-      }
-
-      // 5) Subject: Required, non‐empty
-      const subjectVal = document.getElementById('subject').value.trim();
-      if (!subjectVal) {
-        errors.push('• Subject is required.');
-        document.getElementById('subject').classList.add('error-border');
-        document.getElementById('err-subject').textContent = 'Please enter a subject.';
-      }
-
-      // 6) Description: Required, non‐empty
-      const descVal = document.getElementById('description').value.trim();
-      if (!descVal) {
-        errors.push('• Description is required.');
-        document.getElementById('description').classList.add('error-border');
-        document.getElementById('err-description').textContent = 'Please describe your complaint.';
-      }
-
-      // If there are errors, show summary at top and do not submit
-      if (errors.length > 0) {
-        summaryBox.innerHTML = '<strong>Please fix the following errors:</strong><br>' + errors.join('<br>');
-        summaryBox.style.display = 'block';
-        return; // stop submission until user fixes
-      }
-
-      // No errors → submit to Salesforce
-      this.submit();
-    });
+   document.getElementById('complaintForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+ 
+  const fields = [
+    { id: 'bookingId', name: 'Booking Id' },
+    { id: 'name',     name: 'Contact Name' },
+    { id: 'email',    name: 'Email' },
+    { id: 'phone',    name: 'Phone' },
+    { id: 'subject',  name: 'Subject' },
+    { id: 'description', name: 'Description' }
+  ];
+ 
+  let errors = [];
+  fields.forEach(f => {
+    document.getElementById(f.id).classList.remove('error-border');
+    document.getElementById('err-' + f.id).textContent = '';
+  });
+ 
+  const summaryBox = document.getElementById('errorSummary');
+  summaryBox.style.display = 'none';
+  summaryBox.innerHTML = '';
+ 
+  // Validate each field
+  const bookingVal = document.getElementById('bookingId').value.trim();
+  if (!bookingVal) {
+    errors.push('• Booking Id is required.');
+    document.getElementById('bookingId').classList.add('error-border');
+    document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
+  }
+ 
+  const nameVal = document.getElementById('name').value.trim();
+  if (!nameVal) {
+    errors.push('• Contact Name is required.');
+    document.getElementById('name').classList.add('error-border');
+    document.getElementById('err-name').textContent = 'Please enter your name.';
+  }
+ 
+  const emailElem = document.getElementById('email');
+  const emailVal = emailElem.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailVal) {
+    errors.push('• Email is required.');
+    emailElem.classList.add('error-border');
+    document.getElementById('err-email').textContent = 'Please enter an email address.';
+  } else if (!emailPattern.test(emailVal)) {
+    errors.push('• Email must be a valid email address.');
+    emailElem.classList.add('error-border');
+    document.getElementById('err-email').textContent = 'Invalid email format.';
+  }
+ 
+  const phoneVal = document.getElementById('phone').value.trim();
+  if (!phoneVal) {
+    errors.push('• Phone is required.');
+    document.getElementById('phone').classList.add('error-border');
+    document.getElementById('err-phone').textContent = 'Please enter your phone number.';
+  }
+ 
+  const subjectVal = document.getElementById('subject').value.trim();
+  if (!subjectVal) {
+    errors.push('• Subject is required.');
+    document.getElementById('subject').classList.add('error-border');
+    document.getElementById('err-subject').textContent = 'Please enter a subject.';
+  }
+ 
+  const descVal = document.getElementById('description').value.trim();
+  if (!descVal) {
+    errors.push('• Description is required.');
+    document.getElementById('description').classList.add('error-border');
+    document.getElementById('err-description').textContent = 'Please enter a description.';
+  }
+ 
+  if (errors.length > 0) {
+    summaryBox.style.display = 'block';
+    summaryBox.innerHTML = errors.join('<br>');
+    return;
+  }
+ 
+  // Redirect to thank you page after successful validation
+  window.location.href = 'thankyou.html';
+});
+ 
   </script>
 </body>
 </html>
+ 
+ 
