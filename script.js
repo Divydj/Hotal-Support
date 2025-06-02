@@ -2,7 +2,7 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   event.preventDefault(); // Temporarily block form submission
 
   const fields = [
-  
+      { id: 'Booking__c', name: 'Booking Id' },
     { id: 'name',     name: 'Contact Name' },
     { id: 'email',    name: 'Email' },
     { id: 'phone',    name: 'Phone' },
@@ -23,12 +23,12 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   const emailElem = document.getElementById('email');
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Validation logic
-  // if (!document.getElementById('bookingId').value.trim()) {
-  //   errors.push('• Booking Id is required.');
-  //   document.getElementById('bookingId').classList.add('error-border');
-  //   document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
-  // }
+  Validation logic
+  if (!document.getElementById('Booking__c').value.trim()) {
+    errors.push('• Booking Id is required.');
+    document.getElementById('Booking__c').classList.add('error-border');
+    document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
+  }
 
   if (!document.getElementById('name').value.trim()) {
     errors.push('• Contact Name is required.');
