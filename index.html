@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>More actions
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Arham Luxe - Customer Case Form</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
@@ -121,7 +120,10 @@
         <textarea id="description" name="description" rows="4" required></textarea>
       </div>
 
-     
+      <div class="form-group">
+        <label for="rating">Rating (0-10)</label>
+        <input type="number" id="rating" name="rating__c" min="0" max="10" required />
+      </div>
     
 
       <button type="submit" class="btn">Send Case 💌</button>
@@ -130,7 +132,7 @@
 
   <script>
     function validateRating() {
-      const rating = parseFloat(document.getElementById('rating').value);
+      const rating = parseFloat(document.getElementById('rating').value);More actions
       if (isNaN(rating) || rating < 0 || rating > 10) {
         alert('Please enter a valid rating between 0 and 10.');
         return false;
