@@ -88,15 +88,15 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="formContainer">
     <h1>Arham Luxe</h1>
     <h2>Submit Your Case</h2>
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST" onsubmit="return validateRating()">
+    <form id="caseForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST">
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
-      <input type="hidden" name="retURL" value="http://" />
+      <input type="hidden" name="retURL" value="http://thankyou.local" />
 
       <div class="form-group">
-        <label for="bookingId">Booking ID </label>
+        <label for="bookingId">Booking ID</label>
         <input type="text" id="bookingId" name="00NgK000012NWWz" maxlength="20" />
       </div>
 
@@ -120,21 +120,36 @@
         <textarea id="description" name="description" rows="4" required></textarea>
       </div>
 
-    
-
       <button type="submit" class="btn">Send Case 💌</button>
     </form>
   </div>
 
   <script>
-    function validateRating() {
-      const rating = parseFloat(document.getElementById('rating').value);
-      if (isNaN(rating) || rating < 0 || rating > 10) {
-        alert('Please enter a valid rating between 0 and 10.');
-        return false;
-      }
-      return true;
-    }
+    document.getElementById('caseForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const xhr = new XMLHttpRequest();
+      xhr.open(form.method, form.action);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      const formData = new URLSearchParams(new FormData(form)).toString();
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          document.getElementById('formContainer').innerHTML = `
+            <h1>Thank You! 🎉</h1>
+            <h2>Your case has been submitted successfully.</h2>
+            <button class="btn" onclick="window.location.reload()">Submit Another Case</button>
+          `;
+        } else {
+          alert('An error occurred. Please try again.');
+        }
+      };
+
+      xhr.send(formData);
+    });
   </script>
 </body>
 </html>
+
