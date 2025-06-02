@@ -2,143 +2,271 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arham Luxe - Customer Case Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <title>Arham Luxe Complaint Form</title>
+
+  <!-- Full‐page background image -->
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg') center/cover no-repeat;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      /* Taj Rambagh Palace exterior image as background */
+      background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://www.wildernesstravel.com/wp-content/uploads/2024/02/10-taj-rambagh-palace-exterior-sunset.jpg')
+        center/cover no-repeat;
+      color: #f5f5f5;
     }
+
+    /* Center container */
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 20px;
-      width: 400px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      animation: fadeInUp 0.8s ease-in-out;
+      max-width: 500px;
+      margin: 60px auto;
+      background-color: rgba(30, 30, 30, 0.9);
+      border: 1px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.8);
+      padding: 30px 25px;
     }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+
     h1 {
       text-align: center;
-      color: #333;
-      font-size: 2rem;
+      font-size: 1.9rem;
+      margin-bottom: 20px;
+      color: #D4AF37; /* Gold accent */
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* FORM LABELS & INPUTS */
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #f0e6d2;
+      font-size: 0.95rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      background-color: #292929;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: #f5f5f5;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #D4AF37;
+      box-shadow: 0 0 6px rgba(212, 175, 55, 0.7);
+    }
+
+    /* ERROR MESSAGE STYLING */
+    .error-text {
+      color: #ff6b6b;
+      font-size: 0.875rem;
+      margin-top: -8px;
       margin-bottom: 10px;
     }
-    h2 {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #666;
+    .error-border {
+      border-color: #ff6b6b !important;
+    }
+    #errorSummary {
+      background-color: #ff6b6b;
+      color: #1f1f1f;
+      padding: 12px 16px;
+      border-radius: 4px;
       margin-bottom: 20px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    label {
-      font-weight: 500;
-      margin-bottom: 6px;
-      display: block;
-      color: #555;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1.5px solid #ddd;
+      display: none; /* hidden by default */
       font-size: 0.95rem;
-      transition: 0.3s ease;
     }
-    input:focus, textarea:focus {
-      border-color: #FF8AB8;
-      outline: none;
-      box-shadow: 0 0 5px rgba(255,138,184,0.4);
-    }
-    .btn {
+
+    /* SUBMIT BUTTON */
+    .btn-submit {
       width: 100%;
-      background-color: #FF8AB8;
-      color: white;
       padding: 12px;
-      border: none;
-      border-radius: 12px;
       font-size: 1rem;
-      font-weight: 600;
+      background-color: #D4AF37;
+      border: none;
+      border-radius: 4px;
+      color: #1e1e1e;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: background-color 0.2s ease;
     }
-    .btn:hover {
-      background-color: #FF5CA9;
-      transform: translateY(-2px);
+    .btn-submit:hover {
+      background-color: #c49c2f;
     }
-    @media (max-width: 450px) {
-      .container { width: 90%; }
+
+    /* Required‐field asterisk */
+    .required-asterisk {
+      color: #D4AF37;
+      margin-left: 2px;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Arham Luxe</h1>
-    <h2>Submit Your Case</h2>
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgK000003c3OC" method="POST" onsubmit="return validateRating()">
+    <h1>Hotel Arham Luxe  Complaint</h1>
+
+    <!-- ERROR SUMMARY: visible only when JS finds errors -->
+    <div id="errorSummary"></div>
+
+    <!-- ────────── Web‐to‐Case Form ────────── -->
+    <form id="complaintForm"
+          action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
+          method="POST" novalidate>
+
+      <!-- HIDDEN FIELDS: Salesforce Web-to-Case -->
       <input type="hidden" name="orgid" value="00DgK000003c3OC" />
-      <input type="hidden" name="retURL" value="http://" />
+      <input type="hidden" name="retURL" value="thankyou.html" />
 
-      <div class="form-group">
-        <label for="bookingId">Booking ID </label>
-        <input type="text" id="bookingId" name="00NgK000012NWWz" maxlength="20" />
-      </div>
+      <!-- Hidden: Hotel Name (custom Case field: Hotel_Name__c) -->
+      <input type="hidden" name="Hotel_Name__c" value="Arham Luxe" />
 
-      <div class="form-group">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" maxlength="80" required />
-      </div>
+      <!-- OPTIONAL DEBUG (uncomment to test XML response) -->
+      <!-- <input type="hidden" name="debug" value="1" /> -->
+      <!-- <input type="hidden" name="debugEmail" value="jaindivy153@gmail.com" /> -->
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" maxlength="80" required />
-      </div>
+      <!-- ────────────────────────────────────────────────── -->
+      <!-- 1) Booking Id (Required) – Salesforce field API name = 00NgK000012NWWz -->
+      <label for="bookingId">Booking Id<span class="required-asterisk">*</span></label>
+      <input id="bookingId" name="00NgK000012NWWz" type="text" maxlength="20" />
+      <div id="err-bookingId" class="error-text"></div>
 
-      <div class="form-group">
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" maxlength="80" required />
-      </div>
+      <!-- 2) Contact Name (Required) -->
+      <label for="name">Contact Name<span class="required-asterisk">*</span></label>
+      <input id="name" name="name" type="text" maxlength="80" />
+      <div id="err-name" class="error-text"></div>
 
-      <div class="form-group">
-        <label for="description">Case Details</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
-      </div>
+      <!-- 3) Email (Required, valid email) -->
+      <label for="email">Email<span class="required-asterisk">*</span></label>
+      <input id="email" name="email" type="email" maxlength="80" />
+      <div id="err-email" class="error-text"></div>
 
-      <div class="form-group">
-        <label for="rating">Rating (0-10)</label>
-        <input type="number" id="rating" name="rating__c" min="0" max="10" required />
-      </div>
-    
+      <!-- 4) Phone (Required) -->
+      <label for="phone">Phone<span class="required-asterisk">*</span></label>
+      <input id="phone" name="phone" type="tel" maxlength="40" />
+      <div id="err-phone" class="error-text"></div>
 
-      <button type="submit" class="btn">Send Case 💌</button>
+      <!-- 5) Subject (Required) -->
+      <label for="subject">Subject<span class="required-asterisk">*</span></label>
+      <input id="subject" name="subject" type="text" maxlength="80" />
+      <div id="err-subject" class="error-text"></div>
+
+      <!-- 6) Description (Required) -->
+      <label for="description">Description<span class="required-asterisk">*</span></label>
+      <textarea id="description" name="description" rows="5"></textarea>
+      <div id="err-description" class="error-text"></div>
+
+      <!-- 7) Submit Button -->
+      <button type="submit" class="btn-submit">Submit Complaint</button>
     </form>
   </div>
 
+  <!-- ────────────────────────────────────────────────── -->
+  <!-- JAVASCRIPT: CLIENT‐SIDE VALIDATION (show all errors at once) -->
   <script>
-    function validateRating() {
-      const rating = parseFloat(document.getElementById('rating').value);More actions
-      if (isNaN(rating) || rating < 0 || rating > 10) {
-        alert('Please enter a valid rating between 0 and 10.');
-        return false;
+    document.getElementById('complaintForm').addEventListener('submit', function(event) {
+      // Prevent default so we can validate first
+      event.preventDefault();
+
+      // Field IDs and their corresponding error‐message containers
+      const fields = [
+        { id: 'bookingId', name: 'Booking Id' },
+        { id: 'name',     name: 'Contact Name' },
+        { id: 'email',    name: 'Email' },
+        { id: 'phone',    name: 'Phone' },
+        { id: 'subject',  name: 'Subject' },
+        { id: 'description', name: 'Description' }
+      ];
+
+      // Clear previous error states
+      let errors = [];
+      fields.forEach(f => {
+        document.getElementById(f.id).classList.remove('error-border');
+        document.getElementById('err-' + f.id).textContent = '';
+      });
+      const summaryBox = document.getElementById('errorSummary');
+      summaryBox.style.display = 'none';
+      summaryBox.innerHTML = '';
+
+      // 1) Booking Id: Required, non‐empty
+      const bookingVal = document.getElementById('bookingId').value.trim();
+      if (!bookingVal) {
+        errors.push('• Booking Id is required.');
+        document.getElementById('bookingId').classList.add('error-border');
+        document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
       }
-      return true;
-    }
+
+      // 2) Contact Name: Required, non‐empty
+      const nameVal = document.getElementById('name').value.trim();
+      if (!nameVal) {
+        errors.push('• Contact Name is required.');
+        document.getElementById('name').classList.add('error-border');
+        document.getElementById('err-name').textContent = 'Please enter your name.';
+      }
+
+      // 3) Email: Required, valid email format
+      const emailElem = document.getElementById('email');
+      const emailVal = emailElem.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailVal) {
+        errors.push('• Email is required.');
+        emailElem.classList.add('error-border');
+        document.getElementById('err-email').textContent = 'Please enter an email address.';
+      } else if (!emailPattern.test(emailVal)) {
+        errors.push('• Email must be a valid email address.');
+        emailElem.classList.add('error-border');
+        document.getElementById('err-email').textContent = 'Invalid email format.';
+      }
+
+      // 4) Phone: Required, non‐empty
+      const phoneVal = document.getElementById('phone').value.trim();
+      if (!phoneVal) {
+        errors.push('• Phone is required.');
+        document.getElementById('phone').classList.add('error-border');
+        document.getElementById('err-phone').textContent = 'Please enter your phone number.';
+      }
+
+      // 5) Subject: Required, non‐empty
+      const subjectVal = document.getElementById('subject').value.trim();
+      if (!subjectVal) {
+        errors.push('• Subject is required.');
+        document.getElementById('subject').classList.add('error-border');
+        document.getElementById('err-subject').textContent = 'Please enter a subject.';
+      }
+
+      // 6) Description: Required, non‐empty
+      const descVal = document.getElementById('description').value.trim();
+      if (!descVal) {
+        errors.push('• Description is required.');
+        document.getElementById('description').classList.add('error-border');
+        document.getElementById('err-description').textContent = 'Please describe your complaint.';
+      }
+
+      // If there are errors, show summary at top and do not submit
+      if (errors.length > 0) {
+        summaryBox.innerHTML = '<strong>Please fix the following errors:</strong><br>' + errors.join('<br>');
+        summaryBox.style.display = 'block';
+        return; // stop submission until user fixes
+      }
+
+      // No errors → submit to Salesforce
+      this.submit();
+    });
   </script>
 </body>
 </html>
