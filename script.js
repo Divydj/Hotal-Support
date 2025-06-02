@@ -74,7 +74,7 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
     summaryBox.innerHTML = errors.join('<br>');
     return;
   }
-
+ this.submit();
   // Redirect to thank you page after successful validation
   window.location.href = 'thankyou.html';
 });
