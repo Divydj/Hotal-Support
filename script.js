@@ -1,5 +1,5 @@
 document.getElementById('complaintForm').addEventListener('submit', function(event) {
-  event.preventDefault();
+  event.preventDefault(); // Temporarily block form submission
 
   const fields = [
     { id: 'bookingId', name: 'Booking Id' },
@@ -20,24 +20,23 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   summaryBox.style.display = 'none';
   summaryBox.innerHTML = '';
 
-  // Validate each field
-  const bookingVal = document.getElementById('bookingId').value.trim();
-  if (!bookingVal) {
+  const emailElem = document.getElementById('email');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Validation logic
+  if (!document.getElementById('bookingId').value.trim()) {
     errors.push('• Booking Id is required.');
     document.getElementById('bookingId').classList.add('error-border');
     document.getElementById('err-bookingId').textContent = 'Please enter your Booking Id.';
   }
 
-  const nameVal = document.getElementById('name').value.trim();
-  if (!nameVal) {
+  if (!document.getElementById('name').value.trim()) {
     errors.push('• Contact Name is required.');
     document.getElementById('name').classList.add('error-border');
     document.getElementById('err-name').textContent = 'Please enter your name.';
   }
 
-  const emailElem = document.getElementById('email');
   const emailVal = emailElem.value.trim();
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailVal) {
     errors.push('• Email is required.');
     emailElem.classList.add('error-border');
@@ -48,22 +47,19 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
     document.getElementById('err-email').textContent = 'Invalid email format.';
   }
 
-  const phoneVal = document.getElementById('phone').value.trim();
-  if (!phoneVal) {
+  if (!document.getElementById('phone').value.trim()) {
     errors.push('• Phone is required.');
     document.getElementById('phone').classList.add('error-border');
     document.getElementById('err-phone').textContent = 'Please enter your phone number.';
   }
 
-  const subjectVal = document.getElementById('subject').value.trim();
-  if (!subjectVal) {
+  if (!document.getElementById('subject').value.trim()) {
     errors.push('• Subject is required.');
     document.getElementById('subject').classList.add('error-border');
     document.getElementById('err-subject').textContent = 'Please enter a subject.';
   }
 
-  const descVal = document.getElementById('description').value.trim();
-  if (!descVal) {
+  if (!document.getElementById('description').value.trim()) {
     errors.push('• Description is required.');
     document.getElementById('description').classList.add('error-border');
     document.getElementById('err-description').textContent = 'Please enter a description.';
@@ -72,9 +68,9 @@ document.getElementById('complaintForm').addEventListener('submit', function(eve
   if (errors.length > 0) {
     summaryBox.style.display = 'block';
     summaryBox.innerHTML = errors.join('<br>');
-    return;
+    return; // Stop submission
   }
- this.submit();
-  // Redirect to thank you page after successful validation
-  window.location.href = 'thankyou.html';
+
+  // ✅ Submit form if validation passes
+  this.submit();
 });
